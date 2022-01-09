@@ -18,10 +18,13 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log("New connection :" + socket.id)
-    socket.emit("teste", "novo dado")
+    socket.on('test-event', (message) => {
+        console.log('deu certo!')
+        io.emit('deu certo aqui tambem')
+    })
 })
 
-io.on('new-message', (message) => {
+io.on('test-event', (message) => {
     io.emit(message);
 });
 
